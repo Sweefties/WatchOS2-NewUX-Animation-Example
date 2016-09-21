@@ -18,6 +18,11 @@ WatchOS 2 Experiments - New API Components - Animation with duration.
 
 Tested on WatchOS2 Simulators, Apple Watch.
 
+## Important
+
+Get the `master` branch for XCode 8 / Swift 3 updated project.
+
+
 ## Usage
 
 To run the example project, download or clone the repo.
@@ -91,7 +96,7 @@ private let alphaTimer = 1.0
             self.bubbleGroup.setAlpha(1)
         })
     }
-    
+
 }
 ```
 
