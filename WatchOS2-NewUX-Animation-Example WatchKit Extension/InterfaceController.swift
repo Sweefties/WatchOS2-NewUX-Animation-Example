@@ -23,17 +23,17 @@ class InterfaceController: WKInterfaceController {
     
     
     // MARK: - Properties
-    private let duration = 0.5
-    private let alphaTimer = 1.0
+    fileprivate let duration = 0.5
+    fileprivate let alphaTimer = 1.0
     
     
     // MARK: - Context Initializer
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         // Configure interface objects here.
-        self.animateWithDuration(duration) { () -> Void in
-            self.bubbleGroup.setVerticalAlignment(WKInterfaceObjectVerticalAlignment.Top)
-            self.bubbleGroup.setHorizontalAlignment(WKInterfaceObjectHorizontalAlignment.Center)
+        self.animate(withDuration: duration) { () -> Void in
+            self.bubbleGroup.setVerticalAlignment(WKInterfaceObjectVerticalAlignment.top)
+            self.bubbleGroup.setHorizontalAlignment(WKInterfaceObjectHorizontalAlignment.center)
         }
     }
 
@@ -58,43 +58,43 @@ extension Actions {
     
     // move bubble to the left
     @IBAction func moveLeftButton() {
-        self.animateWithDuration(duration) { () -> Void in
-            self.bubbleGroup.setHorizontalAlignment(WKInterfaceObjectHorizontalAlignment.Left)
+        self.animate(withDuration: duration) { () -> Void in
+            self.bubbleGroup.setHorizontalAlignment(WKInterfaceObjectHorizontalAlignment.left)
         }
     }
     // move bubble to the right
     @IBAction func moveRightButton() {
-        self.animateWithDuration(duration) { () -> Void in
-            self.bubbleGroup.setHorizontalAlignment(WKInterfaceObjectHorizontalAlignment.Right)
+        self.animate(withDuration: duration) { () -> Void in
+            self.bubbleGroup.setHorizontalAlignment(WKInterfaceObjectHorizontalAlignment.right)
         }
     }
     // move bubble to the top
     @IBAction func moveUpButton() {
-        self.animateWithDuration(duration) { () -> Void in
-            self.bubbleGroup.setVerticalAlignment(WKInterfaceObjectVerticalAlignment.Top)
+        self.animate(withDuration: duration) { () -> Void in
+            self.bubbleGroup.setVerticalAlignment(WKInterfaceObjectVerticalAlignment.top)
         }
     }
     // move bubble to the bottom
     @IBAction func moveDownButton() {
-        self.animateWithDuration(duration) { () -> Void in
-            self.bubbleGroup.setVerticalAlignment(WKInterfaceObjectVerticalAlignment.Bottom)
+        self.animate(withDuration: duration) { () -> Void in
+            self.bubbleGroup.setVerticalAlignment(WKInterfaceObjectVerticalAlignment.bottom)
         }
     }
     // move bubble to the center (screen)
     @IBAction func moveCenterButton() {
-        self.animateWithDuration(duration) { () -> Void in
-            self.bubbleGroup.setHorizontalAlignment(WKInterfaceObjectHorizontalAlignment.Center)
-            self.bubbleGroup.setVerticalAlignment(WKInterfaceObjectVerticalAlignment.Center)
+        self.animate(withDuration: duration) { () -> Void in
+            self.bubbleGroup.setHorizontalAlignment(WKInterfaceObjectHorizontalAlignment.center)
+            self.bubbleGroup.setVerticalAlignment(WKInterfaceObjectVerticalAlignment.center)
         }
     }
     // animate bubble with alpha
     @IBAction func changeAlphaButton() {
-        self.animateWithDuration(alphaTimer) { () -> Void in
+        self.animate(withDuration: alphaTimer) { () -> Void in
             self.bubbleGroup.setAlpha(0)
         }
-        let completionDelay = dispatch_time(DISPATCH_TIME_NOW, Int64(alphaTimer * Double(NSEC_PER_SEC)))
-        dispatch_after(completionDelay, dispatch_get_main_queue()) {
-            self.animateWithDuration(self.alphaTimer, animations: { () -> Void in
+        let completionDelay = DispatchTime.now() + Double(Int64(alphaTimer * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: completionDelay) {
+            self.animate(withDuration: self.alphaTimer, animations: { () -> Void in
                 self.bubbleGroup.setAlpha(1)
             })
         }
